@@ -1,18 +1,533 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
 <head>
-	<link rel="stylesheet" href="style.css">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>AHS</title>
+<title>Game Score</title>
+<style>
+.jumlahPlayer {background-color: slategray; height: 250px; width: 1000px; position: relative; left:100px; border-bottom: double aqua 10px; border-top:double aqua 10px;border-left:dotted 10px aqua;}
+.jumlahPlayer span {font-size:65px; margin-left: 20px;}
+.jumlahPlayer button {font-size:65px; background-color:lightskyblue; border: black dotted 3px; border-radius: 35px; position:relative; top:8px; margin-left:20px;}
+.jumlahPlayer #plus {background-color: green; color:white; margin-left: 70px;}
+.jumlahPlayer #min {background-color: red; color:white; margin-left: 3px;}
+.player button {background-color: palegoldenrod; border-radius: 30px; margin-right: 6px;}
+input {font-size: 50px; background-color:palegoldenrod;}
+.player .change {font-size:80px; background-color:salmon; border: black dotted 3px; border-radius: 40px; position:relative; top:8px; color:black;}
+.player .repair {font-size:80px; background-color:palegreen; border: black dotted 3px; border-radius: 40px; position:relative; top:8px; color:black;}
+.player span {font-size:80px; color:white;}
+h1 { font-size: 180px; text-align: center; }
+button { font-size: 50px;}
+.result {background-color:darkviolet; color:white;}
+#leaderboard {height:1000px; width:1000px; background-color:magenta; color:white; font-size:80px; position:relative; left:50px; border: solid black 15px; display:none;overflow:auto;}
+#leaderboard span{margin-left:40px; margin-top:40px;}
+#rank1 {background-color: gold; color: black;}
+#rank2 {background-color: silver; color: black;}
+#rank3 {background-color: peru; color: black;}
+</style>
 </head>
-<body style="margin: 0;">
-	<header>
-		<p>
-		<span class="a-header">A</span>
-		<span class="h-header">H</span>
-		<span class="s-header">S</span>
-		</p>
-	</header>
+<body style="background-color: darkslategrey;">
+<h1>Game Score</h1>
+<br><br>
+
+<div class="jumlahPlayer"><span>jumlah Player = </span><span id="jumlahPlayer">2</span>
+<button onclick="jumlahPlayer.plus()" id="plus">+</button><button onclick="jumlahPlayer.min()" id="min">-</button><br>
+<button onclick="clearplayer()">OKE</button></div>
+
+<br><br><br><br><br><br><br><br><br><br>
+<div class="player">
+
+<div id="player1"><span id="name1">a</span><br><div id="buttonP1"><button onclick="p1.j1()">1st</button><button onclick="p1.j2()">2nd</button><button onclick="p1.j3()">3th</button><button onclick="p1.j4()">4th</button>
+<button onclick="p1.j5()">5th</button><button onclick="p1.j6()">6th</button><button onclick="p1.j7()">7th</button><button onclick="p1.j8()">8th</button><button onclick="p1.j9()">9th</button><button onclick="p1.j10()">10th</button></div>
+<input type="number" id="inputRScore1" placeholder= "  input real score"><span id="repair1" class="repair" onclick="player.repair1()">Repair</span><br>
+<input id="inputName1" placeholder= "  input your name"><span id="change1" class="change" onclick="player.change1()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player2"><span id="name2"></span><br><div id="buttonP2"><button onclick="p2.j1()">1st</button><button onclick="p2.j2()">2nd</button><button onclick="p2.j3()">3th</button><button onclick="p2.j4()">4th</button>
+<button onclick="p2.j5()">5th</button><button onclick="p2.j6()">6th</button><button onclick="p2.j7()">7th</button><button onclick="p2.j8()">8th</button><button onclick="p2.j9()">9th</button><button onclick="p2.j10()">10th</button></div>
+<input type="number" id="inputRScore2" placeholder= "  input real score"><span id="repair2" class="repair"onclick="player.repair2()">Repair</span><br>
+<input id="inputName2" placeholder= "  input your name"><span id="change2" class="change" onclick="player.change2()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player3"><span id="name3">c</span><br><div id="buttonP3"><button onclick="p3.j1()">1st</button><button onclick="p3.j2()">2nd</button><button onclick="p3.j3()">3th</button><button onclick="p3.j4()">4th</button>
+<button onclick="p3.j5()">5th</button><button onclick="p3.j6()">6th</button><button onclick="p3.j7()">7th</button><button onclick="p3.j8()">8th</button><button onclick="p3.j9()">9th</button><button onclick="p3.j10()">10th</button></div>
+<input type="number" id="inputRScore3" placeholder= "  input real score"><span id="repair3" class="repair" onclick="player.repair3()">Repair</span><br>
+<input id="inputName3" placeholder= "  input your name"><span id="change3" class="change" onclick="player.change3()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player4"><span id="name4">d</span><br><div id="buttonP4"><button onclick="p4.j1()">1st</button><button onclick="p4.j2()">2nd</button><button onclick="p4.j3()">3th</button><button onclick="p4.j4()">4th</button>
+<button onclick="p4.j5()">5th</button><button onclick="p4.j6()">6th</button><button onclick="p4.j7()">7th</button><button onclick="p4.j8()">8th</button><button onclick="p4.j9()">9th</button><button onclick="p4.j10()">10th</button></div>
+<input type="number" id="inputRScore4" placeholder= "  input real score"><span id="repair4" class="repair" onclick="player.repair4()">Repair</span><br>
+<input id="inputName4" placeholder= "  input your name"><span id="change4" class="change" onclick="player.change4()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player5"><span id="name5"></span><br><div id="buttonP5"><button onclick="p5.j1()">1st</button><button onclick="p5.j2()">2nd</button><button onclick="p5.j3()">3th</button><button onclick="p5.j4()">4th</button>
+<button onclick="p5.j5()">5th</button><button onclick="p5.j6()">6th</button><button onclick="p5.j7()">7th</button><button onclick="p5.j8()">8th</button><button onclick="p5.j9()">9th</button><button onclick="p5.j10()">10th</button></div>
+<input type="number" id="inputRScore5" placeholder= "  input real score"><span id="repair5" class="repair" onclick="player.repair5()">Repair</span><br>
+<input id="inputName5" placeholder= "  input your name"><span id="change5" class="change" onclick="player.change5()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player6"><span id="name6"></span><br><div id="buttonP6"><button onclick="p6.j1()">1st</button><button onclick="p6.j2()">2nd</button><button onclick="p6.j3()">3th</button><button onclick="p6.j4()">4th</button>
+<button onclick="p6.j5()">5th</button><button onclick="p6.j6()">6th</button><button onclick="p6.j7()">7th</button><button onclick="p6.j8()">8th</button><button onclick="p6.j9()">9th</button><button onclick="p6.j10()">10th</button></div>
+<input type="number" id="inputRScore6" placeholder= "  input real score"><span id="repair6" class="repair" onclick="player.repair6()">Repair</span><br>
+<input id="inputName6" placeholder= "  input your name"><span id="change6" class="change" onclick="player.change6()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player7"><span id="name7"></span><br><div id="buttonP7"><button onclick="p7.j1()">1st</button><button onclick="p7.j2()">2nd</button><button onclick="p7.j3()">3th</button><button onclick="p7.j4()">4th</button>
+<button onclick="p7.j5()">5th</button><button onclick="p7.j6()">6th</button><button onclick="p7.j7()">7th</button><button onclick="p7.j8()">8th</button><button onclick="p7.j9()">9th</button><button onclick="p7.j10()">10th</button></div>
+<input type="number" id="inputRScore7" placeholder= "  input real score"><span id="repair7" class="repair" onclick="player.repair7()">Repair</span><br>
+<input id="inputName7" placeholder= "  input your name"><span id="change7" class="change" onclick="player.change7()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player8"><span id="name8"></span><br><div id="buttonP8"><button onclick="p8.j1()">1st</button><button onclick="p8.j2()">2nd</button><button onclick="p8.j3()">3th</button><button onclick="p8.j4()">4th</button>
+<button onclick="p8.j5()">5th</button><button onclick="p8.j6()">6th</button><button onclick="p8.j7()">7th</button><button onclick="p8.j8()">8th</button><button onclick="p8.j9()">9th</button><button onclick="p8.j10()">10th</button></div>
+<input type="number" id="inputRScore8" placeholder= "  input real score"><span id="repair8" class="repair" onclick="player.repair8()">Repair</span><br>
+<input id="inputName8" placeholder= "  input your name"><span id="change8" class="change" onclick="player.change8()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player9"><span id="name9"></span><br><div id="buttonP9"><button onclick="p9.j1()">1st</button><button onclick="p9.j2()">2nd</button><button onclick="p9.j3()">3th</button><button onclick="p9.j4()">4th</button>
+<button onclick="p9.j5()">5th</button><button onclick="p9.j6()">6th</button><button onclick="p9.j7()">7th</button><button onclick="p9.j8()">8th</button><button onclick="p9.j9()">9th</button><button onclick="p9.j10()">10th</button></div>
+<input type="number" id="inputRScore9" placeholder= "  input real score"><span id="repair9" class="repair" onclick="player.repair9()">Repair</span><br>
+<input id="inputName9" placeholder= "  input your name"><span id="change9" class="change" onclick="player.change9()">Change</span>
+<br><br><br>
+</div>
+
+<div id="player10"><span id="name10"></span><br><div id="buttonP10"><button onclick="p10.j1()">1st</button><button onclick="p10.j2()">2nd</button><button onclick="p10.j3()">3th</button><button onclick="p10.j4()">4th</button>
+<button onclick="p10.j5()">5th</button><button onclick="p10.j6()">6th</button><button onclick="p10.j7()">7th</button><button onclick="p10.j8()">8th</button><button onclick="p10.j9()">9th</button><button onclick="p10.j10()">10th</button></div>
+<input type="number" id="inputRScore10" placeholder= "  input real score"><span id="repair10" class="repair" onclick="player.repair10()">Repair</span><br>
+<input id="inputName10" placeholder= "  input your name"><span id="change10" class="change" onclick="player.change10()">Change</span>
+<br><br><br>
+</div>
+</div>
+
+<br><br><br><button class="result" onclick="result()">Result</button>
+<br><p id="leaderboard">
+<span id="rank1"></span><br><span id="rank2"></span><br><span id="rank3"></span><br>
+<span id="rank4"></span><br><span id="rank5"></span><br><span id="rank6"></span><br><span id="rank7"></span><br>
+<span id="rank8"></span><br><span id="rank9"></span><br><span id="rank10"></span>
+</p>
+<script>
+var Score = [
+{points: 0, name: "player1", id:1},
+{points: 0, name: "player2", id:2},
+{points: 0, name: "player3", id:3},
+{points: 0, name: "player4", id:4},
+{points: 0, name: "player5", id:5},
+{points: 0, name: "player6", id:6},
+{points: 0, name: "player7", id:7},
+{points: 0, name: "player8", id:8},
+{points: 0, name: "player9", id:9},
+{points: 0, name: "player10", id:10},
+]
+Score[0].name = localStorage.getItem("player1");Score[0].points = localStorage.getItem("points1")*1;
+Score[1].name = localStorage.getItem("player2");Score[1].points = localStorage.getItem("points2")*1;
+Score[2].name = localStorage.getItem("player3");Score[2].points = localStorage.getItem("points3")*1;
+Score[3].name = localStorage.getItem("player4");Score[3].points = localStorage.getItem("points4")*1;
+Score[4].name = localStorage.getItem("player5");Score[4].points = localStorage.getItem("points5")*1;
+Score[5].name = localStorage.getItem("player6");Score[5].points = localStorage.getItem("points6")*1;
+Score[6].name = localStorage.getItem("player7");Score[6].points = localStorage.getItem("points7")*1;
+Score[7].name = localStorage.getItem("player8");Score[7].points = localStorage.getItem("points8")*1;
+Score[8].name = localStorage.getItem("player9");Score[8].points = localStorage.getItem("points9")*1;
+Score[9].name = localStorage.getItem("player10");Score[9].points = localStorage.getItem("points10")*1;
+
+
+
+var jumlahPlayer = {
+jplayer: 2,
+plus: function(){if(this.jplayer < 10){this.jplayer= this.jplayer + 1; document.getElementById("jumlahPlayer").innerHTML=this.jplayer;}},
+min: function() {if(this.jplayer > 2){this.jplayer= this.jplayer - 1; document.getElementById("jumlahPlayer").innerHTML=this.jplayer;}},
+}
+jumlahPlayer.jplayer = localStorage.getItem("jumlahPlayer")*1;
+document.getElementById("jumlahPlayer").innerHTML = jumlahPlayer.jplayer;
+
+function clearplayer() {
+localStorage.setItem("jumlahPlayer", jumlahPlayer.jplayer);
+if (jumlahPlayer.jplayer == 2) {
+document.getElementById("player3").style.display = "none";
+document.getElementById("player4").style.display = "none";
+document.getElementById("player5").style.display = "none";
+document.getElementById("player6").style.display = "none";
+document.getElementById("player7").style.display = "none";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 3) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "none";
+document.getElementById("player5").style.display = "none";
+document.getElementById("player6").style.display = "none";
+document.getElementById("player7").style.display = "none";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 4) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "none";
+document.getElementById("player6").style.display = "none";
+document.getElementById("player7").style.display = "none";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 5) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "none";
+document.getElementById("player7").style.display = "none";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 6) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "block";
+document.getElementById("player7").style.display = "none";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 7) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "block";
+document.getElementById("player7").style.display = "block";
+document.getElementById("player8").style.display = "none";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 8) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "block";
+document.getElementById("player7").style.display = "block";
+document.getElementById("player8").style.display = "block";
+document.getElementById("player9").style.display = "none";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 9) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "block";
+document.getElementById("player7").style.display = "block";
+document.getElementById("player8").style.display = "block";
+document.getElementById("player9").style.display = "block";
+document.getElementById("player10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 10) {
+document.getElementById("player3").style.display = "block";
+document.getElementById("player4").style.display = "block";
+document.getElementById("player5").style.display = "block";
+document.getElementById("player6").style.display = "block";
+document.getElementById("player7").style.display = "block";
+document.getElementById("player8").style.display = "block";
+document.getElementById("player9").style.display = "block";
+document.getElementById("player10").style.display = "block";
+}
+else {};
+}
+clearplayer();
+
+var player = {
+
+
+change1: function(){Score[0].name= document.getElementById("inputName1").value; document.getElementById("name1").innerHTML = Score[0].name + " |     Points > " + Score[0].points;},
+change2: function(){Score[1].name= document.getElementById("inputName2").value; document.getElementById("name2").innerHTML = Score[1].name + " |     Points > " + Score[1].points;},
+change3: function(){Score[2].name= document.getElementById("inputName3").value; document.getElementById("name3").innerHTML = Score[2].name + " |     Points > " + Score[2].points;},
+change4: function(){Score[3].name= document.getElementById("inputName4").value; document.getElementById("name4").innerHTML = Score[3].name + " |     Points > " + Score[3].points;},
+change5: function(){Score[4].name= document.getElementById("inputName5").value; document.getElementById("name5").innerHTML = Score[4].name + " |     Points > " + Score[4].points;},
+change6: function(){Score[5].name= document.getElementById("inputName6").value; document.getElementById("name6").innerHTML = Score[5].name + " |     Points > " + Score[5].points;},
+change7: function(){Score[6].name= document.getElementById("inputName7").value; document.getElementById("name7").innerHTML = Score[6].name + " |     Points > " + Score[6].points;},
+change8: function(){Score[7].name= document.getElementById("inputName8").value; document.getElementById("name8").innerHTML = Score[7].name + " |     Points > " + Score[7].points;},
+change9: function(){Score[8].name= document.getElementById("inputName9").value; document.getElementById("name9").innerHTML = Score[8].name + " |     Points > " + Score[8].points;},
+change10: function(){Score[9].name= document.getElementById("inputName10").value; document.getElementById("name10").innerHTML = Score[9].name + " |     Points > " + Score[9].points;},
+
+repair1: function() {Score[0].points= document.getElementById("inputRScore1").value*1; document.getElementById("name1").innerHTML = Score[0].name + " |     Points > " + Score[0].points;points1=Score[0].points;},
+repair2: function() {Score[1].points= document.getElementById("inputRScore2").value*1; document.getElementById("name2").innerHTML = Score[1].name + " |     Points > " + Score[1].points;points2=Score[1].points;},
+repair3: function() {Score[2].points= document.getElementById("inputRScore3").value*1; document.getElementById("name3").innerHTML = Score[2].name + " |     Points > " + Score[2].points;points3=Score[2].points;},
+repair4: function() {Score[3].points= document.getElementById("inputRScore4").value*1; document.getElementById("name4").innerHTML = Score[3].name + " |     Points > " + Score[3].points;points4=Score[3].points;},
+repair5: function() {Score[4].points= document.getElementById("inputRScore5").value*1; document.getElementById("name5").innerHTML = Score[4].name + " |     Points > " + Score[4].points;points5=Score[4].points;},
+repair6: function() {Score[5].points= document.getElementById("inputRScore6").value*1; document.getElementById("name6").innerHTML = Score[5].name + " |     Points > " + Score[5].points;points6=Score[5].points;},
+repair7: function() {Score[6].points= document.getElementById("inputRScore7").value*1; document.getElementById("name7").innerHTML = Score[6].name + " |     Points > " + Score[6].points;points7=Score[6].points;},
+repair8: function() {Score[7].points= document.getElementById("inputRScore8").value*1; document.getElementById("name8").innerHTML = Score[7].name + " |     Points > " + Score[7].points;points8=Score[7].points;},
+repair9: function() {Score[8].points= document.getElementById("inputRScore9").value*1; document.getElementById("name9").innerHTML = Score[8].name + " |     Points > " + Score[8].points;points9=Score[8].points;},
+repair10: function() {Score[9].points= document.getElementById("inputRScore10").value*1; document.getElementById("name10").innerHTML = Score[9].name + " |     Points > " + Score[9].points;points10=Score[9].points;},
+}
+
+var p1 = {
+j1: function(){Score[0].points += jumlahPlayer.jplayer; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j2: function(){Score[0].points += jumlahPlayer.jplayer - 1; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j3: function(){Score[0].points += jumlahPlayer.jplayer - 2; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j4: function(){Score[0].points += jumlahPlayer.jplayer - 3; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j5: function(){Score[0].points += jumlahPlayer.jplayer - 4; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j6: function(){Score[0].points += jumlahPlayer.jplayer - 5; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j7: function(){Score[0].points += jumlahPlayer.jplayer - 6; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j8: function(){Score[0].points += jumlahPlayer.jplayer - 7; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j9: function(){Score[0].points += jumlahPlayer.jplayer - 8; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+j10: function(){Score[0].points += jumlahPlayer.jplayer - 9; document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;},
+}
+var p2 = {
+j1: function(){Score[1].points += jumlahPlayer.jplayer; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j2: function(){Score[1].points += jumlahPlayer.jplayer - 1; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j3: function(){Score[1].points += jumlahPlayer.jplayer - 2; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j4: function(){Score[1].points += jumlahPlayer.jplayer - 3; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j5: function(){Score[1].points += jumlahPlayer.jplayer - 4; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j6: function(){Score[1].points += jumlahPlayer.jplayer - 5; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j7: function(){Score[1].points += jumlahPlayer.jplayer - 6; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j8: function(){Score[1].points += jumlahPlayer.jplayer - 7; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j9: function(){Score[1].points += jumlahPlayer.jplayer - 8; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+j10: function(){Score[1].points += jumlahPlayer.jplayer - 9; document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;},
+}
+var p3 = {
+j1: function(){Score[2].points += jumlahPlayer.jplayer; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j2: function(){Score[2].points += jumlahPlayer.jplayer - 1; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j3: function(){Score[2].points += jumlahPlayer.jplayer - 2; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j4: function(){Score[2].points += jumlahPlayer.jplayer - 3; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j5: function(){Score[2].points += jumlahPlayer.jplayer - 4; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j6: function(){Score[2].points += jumlahPlayer.jplayer - 5; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j7: function(){Score[2].points += jumlahPlayer.jplayer - 6; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j8: function(){Score[2].points += jumlahPlayer.jplayer - 7; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j9: function(){Score[2].points += jumlahPlayer.jplayer - 8; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+j10: function(){Score[2].points += jumlahPlayer.jplayer - 9; document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;},
+}
+var p4 = {
+j1: function(){Score[3].points += jumlahPlayer.jplayer;; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j2: function(){Score[3].points += jumlahPlayer.jplayer - 1; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j3: function(){Score[3].points += jumlahPlayer.jplayer - 2; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j4: function(){Score[3].points += jumlahPlayer.jplayer - 3; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j5: function(){Score[3].points += jumlahPlayer.jplayer - 4; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j6: function(){Score[3].points += jumlahPlayer.jplayer - 5; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j7: function(){Score[3].points += jumlahPlayer.jplayer - 6; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j8: function(){Score[3].points += jumlahPlayer.jplayer - 7; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j9: function(){Score[3].points += jumlahPlayer.jplayer - 8; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+j10: function(){Score[3].points += jumlahPlayer.jplayer - 9; document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;},
+}
+var p5 = {
+j1: function(){Score[4].points += jumlahPlayer.jplayer; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j2: function(){Score[4].points += jumlahPlayer.jplayer - 1; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j3: function(){Score[4].points += jumlahPlayer.jplayer - 2; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j4: function(){Score[4].points += jumlahPlayer.jplayer - 3; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j5: function(){Score[4].points += jumlahPlayer.jplayer - 4; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j6: function(){Score[4].points += jumlahPlayer.jplayer - 5; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j7: function(){Score[4].points += jumlahPlayer.jplayer - 6; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j8: function(){Score[4].points += jumlahPlayer.jplayer - 7; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j9: function(){Score[4].points += jumlahPlayer.jplayer - 8; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+j10: function(){Score[4].points += jumlahPlayer.jplayer - 9; document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;},
+}
+var p6 = {
+j1: function(){Score[5].points += jumlahPlayer.jplayer; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j2: function(){Score[5].points += jumlahPlayer.jplayer - 1; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j3: function(){Score[5].points += jumlahPlayer.jplayer - 2; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j4: function(){Score[5].points += jumlahPlayer.jplayer - 3; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j5: function(){Score[5].points += jumlahPlayer.jplayer - 4; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j6: function(){Score[5].points += jumlahPlayer.jplayer - 5; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j7: function(){Score[5].points += jumlahPlayer.jplayer - 6; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j8: function(){Score[5].points += jumlahPlayer.jplayer - 7; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j9: function(){Score[5].points += jumlahPlayer.jplayer - 8; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+j10: function(){Score[5].points += jumlahPlayer.jplayer - 9; document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;},
+}
+var p7 = {
+j1: function(){Score[6].points += jumlahPlayer.jplayer; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j2: function(){Score[6].points += jumlahPlayer.jplayer - 1; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j3: function(){Score[6].points += jumlahPlayer.jplayer - 2; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j4: function(){Score[6].points += jumlahPlayer.jplayer - 3; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j5: function(){Score[6].points += jumlahPlayer.jplayer - 4; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j6: function(){Score[6].points += jumlahPlayer.jplayer - 5; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j7: function(){Score[6].points += jumlahPlayer.jplayer - 6; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j8: function(){Score[6].points += jumlahPlayer.jplayer - 7; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j9: function(){Score[6].points += jumlahPlayer.jplayer - 8; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+j10: function(){Score[6].points += jumlahPlayer.jplayer - 9; document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;},
+}
+var p8 = {
+j1: function(){Score[7].points += jumlahPlayer.jplayer; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j2: function(){Score[7].points += jumlahPlayer.jplayer - 1; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j3: function(){Score[7].points += jumlahPlayer.jplayer - 2; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j4: function(){Score[7].points += jumlahPlayer.jplayer - 3; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j5: function(){Score[7].points += jumlahPlayer.jplayer - 4; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j6: function(){Score[7].points += jumlahPlayer.jplayer - 5; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j7: function(){Score[7].points += jumlahPlayer.jplayer - 6; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j8: function(){Score[7].points += jumlahPlayer.jplayer - 7; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j9: function(){Score[7].points += jumlahPlayer.jplayer - 8; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+j10: function(){Score[7].points += jumlahPlayer.jplayer - 9; document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;},
+}
+var p9 = {
+j1: function(){Score[8].points += jumlahPlayer.jplayer; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j2: function(){Score[8].points += jumlahPlayer.jplayer - 1; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j3: function(){Score[8].points += jumlahPlayer.jplayer - 2; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j4: function(){Score[8].points += jumlahPlayer.jplayer - 3; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j5: function(){Score[8].points += jumlahPlayer.jplayer - 4; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j6: function(){Score[8].points += jumlahPlayer.jplayer - 5; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j7: function(){Score[8].points += jumlahPlayer.jplayer - 6; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j8: function(){Score[8].points += jumlahPlayer.jplayer - 7; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j9: function(){Score[8].points += jumlahPlayer.jplayer - 8; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+j10: function(){Score[8].points += jumlahPlayer.jplayer - 9; document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;},
+}
+var p10 = {
+j1: function(){Score[9].points += jumlahPlayer.jplayer; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j2: function(){Score[9].points += jumlahPlayer.jplayer - 1; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j3: function(){Score[9].points += jumlahPlayer.jplayer - 2; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j4: function(){Score[9].points += jumlahPlayer.jplayer - 3; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j5: function(){Score[9].points += jumlahPlayer.jplayer - 4; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j6: function(){Score[9].points += jumlahPlayer.jplayer - 5; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j7: function(){Score[9].points += jumlahPlayer.jplayer - 6; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j8: function(){Score[9].points += jumlahPlayer.jplayer - 7; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j9: function(){Score[9].points += jumlahPlayer.jplayer - 8; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+j10: function(){Score[9].points += jumlahPlayer.jplayer - 9; document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;},
+}
+
+function result() {
+function compare(a,b){return b.points - a.points}
+function reset(a,b) {return a.id - b.id}
+Score.sort(compare);
+
+document.getElementById("leaderboard").style.display = "block";
+document.getElementById("rank1").innerHTML ="1. " + Score[0].name + " |     Points > " + Score[0].points;
+document.getElementById("rank2").innerHTML ="2. " + Score[1].name + " |     Points > " + Score[1].points;
+document.getElementById("rank3").innerHTML ="3. " + Score[2].name + " |     Points > " + Score[2].points;
+document.getElementById("rank4").innerHTML ="4. " + Score[3].name + " |     Points > " + Score[3].points;
+document.getElementById("rank5").innerHTML ="5. " + Score[4].name + " |     Points > " + Score[4].points;
+document.getElementById("rank6").innerHTML ="6. " + Score[5].name + " |     Points > " + Score[5].points;
+document.getElementById("rank7").innerHTML ="7. " + Score[6].name + " |     Points > " + Score[6].points;
+document.getElementById("rank8").innerHTML ="8. " + Score[7].name + " |     Points > " + Score[7].points;
+document.getElementById("rank9").innerHTML ="9. " + Score[8].name + " |     Points > " + Score[8].points;
+document.getElementById("rank10").innerHTML ="10. " + Score[9].name + " |     Points > " + Score[9].points;
+
+document.getElementById("rank1").style.display = "block";
+document.getElementById("rank2").style.display = "block";
+if (jumlahPlayer.jplayer == 2) {
+document.getElementById("rank3").style.display = "none";
+document.getElementById("rank4").style.display = "none";
+document.getElementById("rank5").style.display = "none";
+document.getElementById("rank6").style.display = "none";
+document.getElementById("rank7").style.display = "none";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 3) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "none";
+document.getElementById("rank5").style.display = "none";
+document.getElementById("rank6").style.display = "none";
+document.getElementById("rank7").style.display = "none";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 4) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "none";
+document.getElementById("rank6").style.display = "none";
+document.getElementById("rank7").style.display = "none";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 5) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "none";
+document.getElementById("rank7").style.display = "none";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 6) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "block";
+document.getElementById("rank7").style.display = "none";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 7) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "block";
+document.getElementById("rank7").style.display = "block";
+document.getElementById("rank8").style.display = "none";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 8) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "block";
+document.getElementById("rank7").style.display = "block";
+document.getElementById("rank8").style.display = "block";
+document.getElementById("rank9").style.display = "none";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 9) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "block";
+document.getElementById("rank7").style.display = "block";
+document.getElementById("rank8").style.display = "block";
+document.getElementById("rank9").style.display = "block";
+document.getElementById("rank10").style.display = "none";
+}
+if (jumlahPlayer.jplayer == 10) {
+document.getElementById("rank3").style.display = "block";
+document.getElementById("rank4").style.display = "block";
+document.getElementById("rank5").style.display = "block";
+document.getElementById("rank6").style.display = "block";
+document.getElementById("rank7").style.display = "block";
+document.getElementById("rank8").style.display = "block";
+document.getElementById("rank9").style.display = "block";
+document.getElementById("rank10").style.display = "block";
+}
+else {}
+;
+
+Score.sort(reset);
+localStorage.setItem("player1", Score[0].name);localStorage.setItem("points1", Score[0].points);
+localStorage.setItem("player2", Score[1].name);localStorage.setItem("points2", Score[1].points);
+localStorage.setItem("player3", Score[2].name);localStorage.setItem("points3", Score[2].points);
+localStorage.setItem("player4", Score[3].name);localStorage.setItem("points4", Score[3].points);
+localStorage.setItem("player5", Score[4].name);localStorage.setItem("points5", Score[4].points);
+localStorage.setItem("player6", Score[5].name);localStorage.setItem("points6", Score[5].points);
+localStorage.setItem("player7", Score[6].name);localStorage.setItem("points7", Score[6].points);
+localStorage.setItem("player8", Score[7].name);localStorage.setItem("points8", Score[7].points);
+localStorage.setItem("player9", Score[8].name);localStorage.setItem("points9", Score[8].points);
+localStorage.setItem("player10", Score[9].name);localStorage.setItem("points10", Score[9].points);
+}
+
+document.getElementById("name1").innerHTML= Score[0].name + " |     Points > " + Score[0].points;
+document.getElementById("name2").innerHTML= Score[1].name + " |     Points > " + Score[1].points;
+document.getElementById("name3").innerHTML= Score[2].name + " |     Points > " + Score[2].points;
+document.getElementById("name4").innerHTML= Score[3].name + " |     Points > " + Score[3].points;
+document.getElementById("name5").innerHTML= Score[4].name + " |     Points > " + Score[4].points;
+document.getElementById("name6").innerHTML= Score[5].name + " |     Points > " + Score[5].points;
+document.getElementById("name7").innerHTML= Score[6].name + " |     Points > " + Score[6].points;
+document.getElementById("name8").innerHTML= Score[7].name + " |     Points > " + Score[7].points;
+document.getElementById("name9").innerHTML= Score[8].name + " |     Points > " + Score[8].points;
+document.getElementById("name10").innerHTML= Score[9].name + " |     Points > " + Score[9].points;
+
+
+
+</script>
+
 </body>
-</html>
+
+
+
